@@ -1,0 +1,97 @@
+//mobile first desig: Design for mobile displays from 360×640 through 414×896.
+ion-content {
+    --background: url('/assets/img/bg_illustration.svg') no-repeat 100% 100%;
+}
+
+.wrapper{
+    margin: 0 auto;
+    width: 80%;
+}
+
+.logo{
+    color: #4b45bd;
+    font-size: 30px;
+}
+
+.logo-last-letter{
+    opacity: 0.6;
+}
+
+.nav-button{
+    width:50%;
+    font-size:14px;
+    --background:#4b45bd ;
+}
+
+#registration-icon{
+    width: 10px;
+    padding:10px;
+}
+
+.home-menu-button{
+    --color: #4b45bd;
+
+}
+
+#home-welcome-message{
+    font-size:28px;
+    font-family: Roboto-Bold;
+    padding-top: 5%;
+    padding-bottom: 10%;
+}
+
+#home-mini-welcome-message{
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+//tablet display Design for tablet displays from 601×962 through 1280×800.
+@media only screen and (min-width: 601px) {
+    .wrapper{
+        margin: 0 auto;
+        width: 80%;
+    }
+    
+    .logo{
+        color: #4b45bd;
+        font-size: 60px;
+    }
+    
+    .logo-last-letter{
+        opacity: 0.6;
+    }
+    
+    .nav-button{
+        width:50%;
+        font-size:20px;
+        --background:#4b45bd ;
+    }
+    
+    #registration-icon{
+        width: 10px;
+        padding:10px;
+    }
+    
+    .home-menu-button{
+        --color: #4b45bd;
+    
+    }
+    
+    #home-welcome-message{
+        font-size:50px;
+        font-family: Roboto-Bold;
+        padding-top: 5%;
+        padding-bottom: 10%;
+    }
+    
+    #home-mini-welcome-message{
+        font-size: 28px;
+        opacity: 0.6;
+    }
+    
+}
+
+//desktop display Design for desktop displays from 1024×768 through 1920×1080.
+@media only screen and (min-width: 1024px) {
+    
+}

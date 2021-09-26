@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>overview</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-item>{{getUser()}}</ion-item>
+<ion-content>
+  <ion-button type="submit" (click)="authService.SignOut()" expand="block">Kijelentkezés</ion-button>
+</ion-content>
