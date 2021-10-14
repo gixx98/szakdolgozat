@@ -1,0 +1,50 @@
+.button-no-background{
+    --color: 'black'
+}
+
+ion-content{
+   --background: url('/assets/img/login-animation.svg') 0 0/100% 160% no-repeat;
+}
+
+
+@media only screen and (min-width: 601px) {
+    ion-content{
+        --background: url('/assets/img/login-animation.svg') 0 0/100% 170% no-repeat;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .container{
+        margin-top:200px;
+        width: 40%;
+    }
+    .login-button{
+        margin-left:100px;
+        margin-right:100px;
+    }
+
+    ion-content{
+        --background: url('/assets/img/login-animation.svg') 0 0/160% 120% no-repeat;
+    }
+}
+
+
+@media only screen and (min-width: 1629px) {
+    .container{
+        margin-top:200px;
+        margin-right: 1100px;
+        margin-left:100px;
+    }
+    .login-button{
+        margin-left:100px;
+        margin-right:100px;
+    }
+
+    ion-item{
+        font-size:22px;
+    }
+
+    ion-content{
+        --background: url('/assets/img/login-animation.svg') 0 0/150% 80% no-repeat;
+    }
+}

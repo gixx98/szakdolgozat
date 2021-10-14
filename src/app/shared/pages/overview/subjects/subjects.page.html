@@ -1,0 +1,19 @@
+<app-overview-header [linkable] ="false"></app-overview-header>
+
+<ion-content>
+<div class="container">
+
+<ion-list>
+  
+  <ion-item *ngFor="let subject of subjects;" lines="full">
+    {{ subject.payload.doc.data().name }}
+    <ion-button color="light" size="small" slot="end" class="ion-no-margin delete-button" (click)="editSubject(subject.payload.doc.data().sid)">Szerkesztés</ion-button>
+    <ion-button color="danger" size="small" slot="end" class="ion-no-margin delete-button" (click)="getSubject( subject.payload.doc.data().sid )">Törlés</ion-button>
+    <ion-reorder slot="end"></ion-reorder>
+  </ion-item>
+</ion-list>
+
+</div>
+</ion-content>
+<ion-button [routerLink]="['add']" slot="end" routerLinkActive="router-link-active"  class="ion-margin add-button" style="--background:#4b45bd ">Tantárgy felvétele <ion-icon name="add-circle-outline" slot="end"></ion-icon></ion-button>
+

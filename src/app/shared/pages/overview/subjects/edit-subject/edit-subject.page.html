@@ -1,0 +1,61 @@
+<app-overview-header></app-overview-header>
+
+<ion-content>
+    <div class="container">
+        <form [formGroup]="editSubjectForm" novalidate class="ion-margin">
+          <ion-list>
+          <ion-item lines="full">
+            <ion-label position="stacked">Tantárgy neve</ion-label>
+            <ion-input formControlName="name" type="text"></ion-input>
+          </ion-item>
+      
+          <ion-item lines="full">
+            <ion-label position="stacked">Tantárgytípus</ion-label>
+            <ion-select value="mandatory" okText="Menjen!" cancelText="Mégse" formControlName="type">
+              <ion-select-option value="mandatory">Kötelező</ion-select-option>
+              <ion-select-option value="selectable_mandatory">Kötelezően választható</ion-select-option>
+              <ion-select-option value="freely_selectable">Szabadon választható</ion-select-option>
+            </ion-select>
+          </ion-item>
+      
+          <ion-item lines="full">
+            <ion-label position="stacked">Óra napja</ion-label>
+            <ion-select value="monday" okText="Menjen!" cancelText="Mégse" formControlName="day">
+              <ion-select-option value="monday">Hétfő</ion-select-option>
+              <ion-select-option value="tuesday">Kedd</ion-select-option>
+              <ion-select-option value="wednesday">Szerda</ion-select-option>
+              <ion-select-option value="thursday">Csütörtök</ion-select-option>
+              <ion-select-option value="friday">Péntek</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="stacked">Óra kezdése</ion-label>
+            <ion-datetime displayFormat="HH:mm" formControlName="hour"></ion-datetime>
+          </ion-item>
+      
+          <ion-item lines="full">
+            <ion-label position="stacked">Kredit</ion-label>
+            <ion-input formControlName="credit" type="text"></ion-input>
+          </ion-item>
+      
+          <ion-item lines="full">
+            <ion-label position="stacked">Jegy (vagy becsült jegy)</ion-label>
+            <ion-input formControlName="mark" type="text"></ion-input>
+          </ion-item>
+      
+          <ion-item lines="full">
+            <ion-label position="stacked">Terem (nem kötelező)</ion-label>
+            <ion-input formControlName="room" type="text"></ion-input>
+          </ion-item>
+      
+          <ion-item lines="full">
+            <ion-label position="stacked">Tanár (nem kötelező)</ion-label>
+            <ion-input formControlName="teacher" type="text"></ion-input>
+          </ion-item>
+      
+          <ion-button (click)="onEditSubmit()" [disabled]="editSubjectForm.invalid" style="--background:#4b45bd" expand="block">Szerkesztés</ion-button>
+      
+        </ion-list>
+        </form>
+      </div>
+</ion-content>

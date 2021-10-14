@@ -3,8 +3,14 @@ import {Test} from './test.model'
 export interface Subject {
     sid?: string,
     name: string,
+    type: string,
+    day: string,
+    hour: string,
     credit: number,
-    temporary_mark: number,
-    actual_mark: number,
-    tests: Test;
+    mark?: number,
+    room?: string,
+    teacher?: string,
+    exams_taken?: number,
+    subject_taken?:number,
+    tests?: Test;
 }

@@ -1,24 +1,18 @@
-<ion-header class="ion-no-border">
-  <ion-grid>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="12" class="ion-text-center">
-        <ion-button [routerLink]="['']" class="logo">SZTE<span class="logo-last-letter">P</span></ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-header>
+<app-logo></app-logo>
 <ion-content>
     <ion-grid>
       <ion-row>
         <p>
-          A bejövő e-mailjeid között megtalálod a verifikációs linket, kattints rá a regisztráció befejezéséhez.
         </p>
+        <div class="ion-text-center">
+          <h3>A bejövő e-mailjeid között megtalálod a verifikációs linket, kattints rá a regisztráció befejezéséhez.</h3>
+        </div>
       </ion-row>
     </ion-grid>
 
     <ion-grid style="padding-top: 30px;"> 
       <ion-row>
-        <ion-col size="12" class="ion-text-center"><ion-button [routerLink]="['/login']" class="nav-button">Bejelentkezés <ion-icon name="log-in-outline" slot="end"></ion-icon></ion-button></ion-col>
+        <ion-col size="12" class="ion-text-center"><ion-button [routerLink]="['/login']" style="--background:#4b45bd" class="nav-button">Bejelentkezés <ion-icon name="log-in-outline" slot="end"></ion-icon></ion-button></ion-col>
       </ion-row>
     </ion-grid>
 </ion-content>

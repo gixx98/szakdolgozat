@@ -3,34 +3,37 @@
     <ion-buttons slot="start">
       <ion-back-button text="Vissza"></ion-back-button>
     </ion-buttons>
-    <ion-title>Bejelentkezés</ion-title>
+    <app-logo></app-logo>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form>    
+  <div class="container">
+  <form [formGroup]="loginForm" class="ion-margin">    
     <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email required></ion-input>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input formControlName="email" type="text" ></ion-input>
     </ion-item> 
 
     <ion-item lines="full">
-      <ion-label position="floating">Jelszó</ion-label>
-      <ion-input type="password" #password required></ion-input>
+      <ion-label position="stacked">Jelszó</ion-label>
+      <ion-input formControlName="password" type="password" ></ion-input>
     </ion-item>
 
     <ion-row>
       <ion-col> 
-      <ion-button style="--background: #4b45bd;" type="submit" (click)="login(email, password)" expand="block">Bejelentkezés</ion-button>
+      <ion-button style="--background: #4b45bd;" class="login-button" type="submit" (click)="login()" [disabled]="loginForm.invalid" expand="block">Bejelentkezés</ion-button>
       </ion-col>
     </ion-row>
   </form>
 
-  <ion-grid style="padding-top: 30px;"> 
-    <ion-row class="ion-align-items-center">
-      <ion-col size="12" class="ion-text-center"><ion-button [routerLink]="['/register']" style="--background:#4b45bd">Regisztráció <ion-icon name="person-add-outline" slot="end"></ion-icon></ion-button></ion-col>
+  <ion-grid style="padding-top: 30px "> 
+    <ion-row class="ion-align-items-center" >
+      <ion-col size="6" class="ion-text-center button-under-login"><ion-button size="small" fill="clear" style="--color:'#4b45bd'" [routerLink]="['/register']" >Regisztráció </ion-button></ion-col>
+      <ion-col size="6" class="ion-text-center button-under-login"><ion-button size="small" fill="clear" style="--color:'#4b45bd'" [routerLink]="['/forgot-password']" >Elfelejtett jelszó </ion-button></ion-col>
     </ion-row>
   </ion-grid>
+  </div>
 
 
 </ion-content>

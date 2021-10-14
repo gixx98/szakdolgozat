@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -19,9 +20,14 @@ const routes: Routes = [
     loadChildren: () => import('./shared/pages/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
   },
   {
-    path: 'overview',
+    path:'overview',
     loadChildren: () => import('./shared/pages/overview/overview.module').then( m => m.OverviewPageModule)
+
   },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./shared/pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  }
 ];
 @NgModule({
   imports: [

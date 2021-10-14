@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
+import { toastController } from '@ionic/core';
 
 @Component({
   selector: 'app-overview',
@@ -16,6 +17,7 @@ export class OverviewPage implements OnInit {
   }
 
   getUser(){
-    localStorage.getItem('user');
+    return JSON.parse(localStorage.getItem('user'))["uid"];
   }
+  
 }

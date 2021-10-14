@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebaseCofig: {
+  firebaseConfig: {
     apiKey: "AIzaSyDeUfob58VgUG8fwkoAYzM-IHWVo4boOnk",
     authDomain: "sztepper-8e51e.firebaseapp.com",
     databaseURL: "https://sztepper-8e51e-default-rtdb.europe-west1.firebasedatabase.app",

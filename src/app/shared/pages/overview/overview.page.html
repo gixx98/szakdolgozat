@@ -1,9 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>overview</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-item>{{getUser()}}</ion-item>
+
 <ion-content>
-  <ion-button type="submit" (click)="authService.SignOut()" expand="block">Kijelentkezés</ion-button>
+
 </ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="account">
+      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-label>Fiók</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="subjects">
+      <ion-icon name="layers-outline"></ion-icon>
+      <ion-label>Tantárgyak</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="calendar">
+      <ion-icon name="calendar"></ion-icon>
+      <ion-label>Naptár</ion-label>
+    </ion-tab-button>
+
+
+    <ion-tab-button tab="calculator">
+      <ion-icon name="calculator-outline"></ion-icon>
+      <ion-label>Átlagok</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="gyik">
+      <ion-icon name="information-circle"></ion-icon>
+      <ion-label>GYIK</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+  <!-- <a href="https://storyset.com/mobile">Mobile illustrations by Storyset</a> -->
+</ion-tabs>

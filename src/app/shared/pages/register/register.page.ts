@@ -12,10 +12,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class RegisterPage implements OnInit {
 
   registerForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required,Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
-    password: new FormControl('', [Validators.required, Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)])
+    password: new FormControl('', [Validators.required, Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{6,30}$/)])
   });
 
   constructor(
@@ -32,20 +32,11 @@ export class RegisterPage implements OnInit {
   }
 
   signUp(){
-    this.authService.RegisterUser(this.registerForm.get('email').value, this.registerForm.get('password').value)
-    .then((res) =>{
-      
-      this.router.navigate(['verify-email']);
-    }).catch((error)=>{
-      window.alert(error.message)
-    })
+    this.authService.RegisterUser(this.registerForm.get('email').value, this.registerForm.get('password').value, this.registerForm.get('firstName').value);
+    this.registerForm.reset()
   }
 
   getPasswordLength(){
     return this.registerForm.get('password').value.length;
-  }
-
-  checkIfPasswordHasLowercase(){
-    // if(this.registerForm.get('password').validator())
   }
 }
