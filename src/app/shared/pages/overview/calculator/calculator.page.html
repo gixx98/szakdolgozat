@@ -1,9 +1,17 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>calculator</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-overview-header [linkable]="false"></app-overview-header>
+
 
 <ion-content>
+   <div class="container">
+    <ion-button (click)="refresh()">Frissítés</ion-button>
 
+        <ion-grid>
+            <ion-row class="ion-align-items-center">
+                <ion-col size="4" *ngIf="credit != 0"> Összesen felvett kredit: {{credit}}</ion-col>
+                <ion-col size="4" *ngIf="gpa != 0"> Súlyozott tanulmányi átlag: {{gpa}}</ion-col>
+                <ion-col size="4" *ngIf="creditIndex != 0"> Kreditindex: {{creditIndex}}</ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 </ion-content>
+

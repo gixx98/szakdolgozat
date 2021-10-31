@@ -28,16 +28,21 @@
     <ion-item lines="full">
       <ion-label position="stacked">Óra napja</ion-label>
       <ion-select value="monday" okText="Menjen!" cancelText="Mégse" formControlName="day">
-        <ion-select-option value="monday">Hétfő</ion-select-option>
-        <ion-select-option value="tuesday">Kedd</ion-select-option>
-        <ion-select-option value="wednesday">Szerda</ion-select-option>
-        <ion-select-option value="thursday">Csütörtök</ion-select-option>
-        <ion-select-option value="friday">Péntek</ion-select-option>
+        <ion-select-option value="1">Hétfő</ion-select-option>
+        <ion-select-option value="2">Kedd</ion-select-option>
+        <ion-select-option value="3">Szerda</ion-select-option>
+        <ion-select-option value="4">Csütörtök</ion-select-option>
+        <ion-select-option value="5">Péntek</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="stacked">Óra kezdése</ion-label>
-      <ion-datetime displayFormat="HH:mm" formControlName="hour"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm" formControlName="hourStart"></ion-datetime>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="stacked">Óra vége</ion-label>
+      <ion-datetime displayFormat="HH:mm" formControlName="hourEnd"></ion-datetime>
     </ion-item>
 
     <ion-item lines="full">

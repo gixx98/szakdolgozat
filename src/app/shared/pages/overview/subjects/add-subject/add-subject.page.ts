@@ -17,7 +17,8 @@ export class AddSubjectPage implements OnInit {
     name: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required),
     day: new FormControl('', Validators.required),
-    hour: new FormControl('', Validators.required),
+    hourStart: new FormControl('', Validators.required),
+    hourEnd: new FormControl('', Validators.required),
     credit: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     mark: new FormControl('', [Validators.pattern("^[0-5]*$")]),
     room: new FormControl(''),
@@ -34,24 +35,26 @@ export class AddSubjectPage implements OnInit {
   }
 
   add(){
-
     var subject:Subject = 
     {
       name: this.addSubjectForm.get('name').value,
       type: this.addSubjectForm.get('type').value,
       day: this.addSubjectForm.get('day').value,
-      hour: this.addSubjectForm.get('hour').value,
+      hourStart: this.addSubjectForm.get('hourStart').value.substr(11,8),
+      hourEnd: this.addSubjectForm.get('hourEnd').value.substr(11,8),
+      startDay: this.addSubjectForm.get('hourStart').value.substr(0,10),
       credit: this.addSubjectForm.get('credit').value,
       mark: this.addSubjectForm.get('mark').value,
       room: this.addSubjectForm.get('room').value,
       teacher: this.addSubjectForm.get('teacher').value,
     }
+
     this.subjectService.add(subject);
     
     toastController.create({
       color: 'success',
-      duration: 1000,
-      message: 'Tárgy felvéve!',
+      duration: 750,
+      message: 'Tárgy sikeresen hozzáadva!',
     }).then((toast)=>{
       toast.present();
     })

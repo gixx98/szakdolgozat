@@ -42,7 +42,7 @@ export class SubjectsPage implements OnInit {
 
   getSubject(sid:string){
     this.subjectService.getSubject(sid).toPromise().then((res) => {
-      if(res.data()['name'] != null)
+      if(res.data()['name'] != undefined)
       this.presentAlertConfirm(res.data()['name'], sid)
     })
   }

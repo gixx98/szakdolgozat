@@ -54,7 +54,7 @@ export class AuthenticationService {
   successfulLogin() {
     toastController.create({
       color: 'success',
-      duration: 2000,
+      duration: 750,
       message: 'Sikeres bejelentkezés',
     }).then((toast) => {
       toast.present();
@@ -64,7 +64,7 @@ export class AuthenticationService {
   successfulLogout() {
     toastController.create({
       color: 'success',
-      duration: 2000,
+      duration: 750,
       position: 'bottom',
       message: 'Legközelebb találkozunk',
     }).then((toast) => {

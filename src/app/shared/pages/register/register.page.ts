@@ -39,4 +39,17 @@ export class RegisterPage implements OnInit {
   getPasswordLength(){
     return this.registerForm.get('password').value.length;
   }
+
+  ifContainsNumber(){
+    return /\d/g.test(this.registerForm.get('password').value);
+  }
+
+  ifHasUpperAndLowerCase(){
+    var str = this.registerForm.get('password').value;
+    if(str.toUpperCase() != str && str.toLowerCase() != str){
+      return true;
+    }
+    return false;
+  }
+
 }

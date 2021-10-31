@@ -13,7 +13,7 @@ import { OverviewPage } from './overview.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    // OverviewPageRoutingModule,
+    OverviewPageRoutingModule
   ],
   declarations: [OverviewPage]
 })

@@ -36,12 +36,11 @@ export class EditSubjectPage implements OnInit {
 
     this.subjectService.subjectForEdit(this.sid).subscribe(res => {
       this.subjectRef = res;
-      console.log(this.subjectRef);
       this.editSubjectForm.setValue({
         name: this.subjectRef.name,
         type:this.subjectRef.type,
         day: this.subjectRef.day,
-        hour:  this.subjectRef.hour,
+        hour:  this.subjectRef.hour.substr(11,8),
         credit: this.subjectRef.credit,
         mark: this.subjectRef.mark,
         room: this.subjectRef.room,

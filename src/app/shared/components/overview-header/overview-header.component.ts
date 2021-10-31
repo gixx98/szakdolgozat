@@ -10,7 +10,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class OverviewHeaderComponent implements OnInit {
 
   @Input()
-  linkable: true;
+  linkable: boolean;
 
   constructor(
     public authService: AuthenticationService,

@@ -1,14 +1,13 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { IonButton, IonHeader } from "@ionic/angular";
+import { IonButton, IonHeader, IonicModule } from "@ionic/angular";
 import { LogoComponent } from "./logo.component";
 
 @NgModule({
-    imports: [RouterModule],
+    imports: [RouterModule,  IonicModule],
     declarations:[LogoComponent],
-    exports: [LogoComponent],
-    bootstrap: [LogoComponent]
+    exports: [LogoComponent]
 })
 
 export class LogoModule{}

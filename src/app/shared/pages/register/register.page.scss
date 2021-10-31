@@ -1,7 +1,10 @@
 .success{
-    --color: green !important;
+    --color: #69bb7b !important;
 }
 
+.error{
+    --color: red !important;
+}
 ion-content{
     --background: url('/assets/img/registration-animation.svg') 0 0/100% 160% no-repeat;
  }

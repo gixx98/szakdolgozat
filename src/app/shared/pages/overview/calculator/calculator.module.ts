@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CalculatorPageRoutingModule } from './calculator-routing.module';
 
 import { CalculatorPage } from './calculator.page';
+import { OverviewHeaderModule } from 'src/app/shared/components/overview-header/overview-header.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CalculatorPageRoutingModule
+    CalculatorPageRoutingModule,
+    OverviewHeaderModule
   ],
   declarations: [CalculatorPage]
 })
