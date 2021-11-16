@@ -34,9 +34,7 @@
     </ion-grid>
       
     <ion-item>
-      <ion-label position="stacked">Jelszó
-        <ion-badge>{{getPasswordLength()}}</ion-badge>
-      </ion-label>
+      <ion-label position="stacked">Jelszó <ion-badge>{{getPasswordLength()}}</ion-badge></ion-label>
       <ion-input formControlName="password" type="password"></ion-input>
     </ion-item>
     <ion-grid>
@@ -50,15 +48,8 @@
         <ion-note  [ngClass]="{'success': ifContainsNumber(), 'error': ifContainsNumber() == false}" >szám</ion-note>
       </ion-row>
     </ion-grid>
-    
-    <ion-grid>
-      <ion-row>
-        <ion-col size="2"></ion-col>
-     </ion-row>
-    </ion-grid>
-        <ion-button (click)="signUp()" [disabled]="registerForm.invalid" style="--background:#4b45bd" expand="block">Regisztráció</ion-button>
-
-  </ion-list>
+    <ion-button (click)="signUp()" [disabled]="registerForm.invalid" style="--background:#4b45bd" expand="block">Regisztráció</ion-button>
+    </ion-list>
   </form>
 </div>
 </ion-content>

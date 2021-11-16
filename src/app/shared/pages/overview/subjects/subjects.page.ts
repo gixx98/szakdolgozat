@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SubjectService } from 'src/app/shared/services/subject.service';
 import { Router} from '@angular/router'
 import { AlertController } from '@ionic/angular';
+import { CalendarService } from 'src/app/shared/services/calendar.service';
 
 @Component({
   selector: 'app-subjects',
@@ -13,6 +14,7 @@ export class SubjectsPage implements OnInit {
   constructor(
     private subjectService:SubjectService,
     public alertController: AlertController,
+    private calendarService: CalendarService,
     public router:Router
     ) { 
 
@@ -20,6 +22,7 @@ export class SubjectsPage implements OnInit {
 
   ngOnInit() {
     this.getSubjects();
+    setTimeout(() => console.log(this.subjects.length), 2000)
   }
 
   subjects:any;
@@ -29,9 +32,22 @@ export class SubjectsPage implements OnInit {
     .getSubjects()
     .subscribe( res => (this.subjects = res));
 
+  getSubjectsLength(){
+    if(this.subjects){
+      return this.subjects.length;
+    }
+  }
+  
   deleteSubject(sid:string) {
     // this.presentAlertConfirm();
-    this.subjectService.delete(sid);
+    this.subjectService.deleteSubject(sid);
+    this.calendarService.getEventsValue().subscribe(value => {
+      value.forEach((row) =>{
+        if(row.subjectSid == sid){
+          this.calendarService.deleteEvent(row.eId);
+        }
+      })
+    })
   }
 
   ifHasNoSubject(){

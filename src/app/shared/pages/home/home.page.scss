@@ -1,3 +1,6 @@
+$welcomeOpacity: 0.6;
+$welcomeOpacityDark: 0.8;
+
 //mobile first desig: Design for mobile displays from 360×640 through 414×896.
 ion-content {
     --background: url('/assets/img/background.svg') 0 0/100% 140% no-repeat;
@@ -20,6 +23,7 @@ ion-content {
 .nav-button{
     width:100%;
     font-size:12px;
+    --border-radius: 20px;
     --background:linear-gradient(90deg, rgba(32,71,79,1) 0%, rgba(75,69,189,1) 39%, rgba(2,0,36,1) 100%);
 
 }
@@ -43,11 +47,15 @@ ion-content {
 
 #home-mini-welcome-message{
     font-size: 14px;
-    opacity: 0.6;
+    opacity: $welcomeOpacity;
 }
 
-//tablet display Design for tablet displays from 601×962 through 1280×800.
+//tablet display Design for tablet displays from 601px
 @media only screen and (min-width: 601px) {
+    ion-content {
+        --background: url('/assets/img/background.svg') 0 0/120% 140% no-repeat;
+    }
+
     .wrapper{
         margin: 0 auto;
         width: 80%;
@@ -64,8 +72,110 @@ ion-content {
     
     .nav-button{
         width:50%;
-        font-size:20px;
+        height: 50px;
+        font-size:16px;
+        --border-radius: 20px;
         --background: linear-gradient(90deg, rgba(32,71,79,1) 0%, rgba(75,69,189,1) 39%, rgba(2,0,36,1) 100%);
+    }
+
+    .button-grid{
+        position: relative;
+        left:-100px;
+        padding-top:20px;
+    }
+    
+    #registration-icon{
+        width: 10px;
+        padding:10px;
+    }
+    
+    #home-welcome-message{
+        font-size:40px;
+        font-family: Roboto-Bold;
+        padding-top: 5%;
+    }
+    
+    #home-mini-welcome-message{
+        font-size: 20px;
+        opacity: $welcomeOpacity;
+    }
+
+    
+}
+
+//desktop display Design for desktop displays from 1366 width and 768px height.
+@media only screen and (min-width: 1366px) and (min-height:768px) {
+    .nav-button{
+        width: 20%;
+        --border-radius: 20px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .button-grid{
+        position: relative;
+        left: -400px;
+    }
+
+    ion-content {
+        --background: url('/assets/img/background.svg') 0 0/160% 70% no-repeat;
+    }
+
+    #home-welcome-message{
+        font-size:50px;
+        font-family: Roboto-Bold;
+        padding-top: 5%;
+    }
+    
+    #home-mini-welcome-message{
+        font-size: 28px;
+        opacity: $welcomeOpacity;
+    }
+
+}
+
+//desktop display Design for desktop displays from 1669 width to infinite.
+@media only screen and (min-width: 1920px) and (min-height:1080px) {
+    .nav-button{
+        width: 50%;
+        --border-radius: 20px;
+        height: 50px;
+    }
+
+    .button-grid{
+        position: relative;
+        left: -500px;
+    }
+
+    ion-content {
+        --background: url('/assets/img/background.svg') no-repeat 100% 100%;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    ion-content {
+        --background: url('/assets/img/background.svg') 0 0/100% 140% no-repeat;
+    }
+    
+    .wrapper{
+        margin: 0 auto;
+        width: 80%;
+    }
+    
+    .logo{
+        color: #4b45bd;
+        font-size: 30px;
+    }
+    
+    .logo-last-letter{
+        opacity: 0.6;
+    }
+    
+    .nav-button{
+        width:100%;
+        font-size:12px;
+        --background: linear-gradient(90deg, rgb(174, 232, 243) 0%, rgb(129, 125, 211) 39%, rgb(192, 190, 233) 100%);
+    
     }
     
     #registration-icon{
@@ -79,33 +189,92 @@ ion-content {
     }
     
     #home-welcome-message{
-        font-size:50px;
+        font-size:28px;
         font-family: Roboto-Bold;
         padding-top: 5%;
-        padding-bottom: 2%;
+        padding-bottom: 5%;
     }
     
     #home-mini-welcome-message{
-        font-size: 28px;
-        opacity: 0.6;
+        font-size: 14px;
+        opacity: $welcomeOpacityDark;
     }
     
-}
-
-//desktop display Design for desktop displays from 1024×768 through 1920×1080.
-@media only screen and (min-width: 1669px) {
-    .nav-button{
-        width: 20%;
-        --border-radius: 20px;
-        height: 50px;
+    //tablet display Design for tablet displays from 601×962 through 1280×800.
+    @media only screen and (min-width: 601px) {
+        ion-content {
+            --background: url('/assets/img/background.svg') no-repeat 0 0/ 100% 150%;
+        }
+        .wrapper{
+            margin: 0 auto;
+            width: 80%;
+        }
+        
+        .logo{
+            color: #4b45bd;
+            font-size: 60px;
+        }
+        
+        .logo-last-letter{
+            opacity: 0.6;
+        }
+        
+        .nav-button{
+            width:50%;
+            font-size:16px;
+            --background: linear-gradient(90deg, rgb(174, 232, 243) 0%, rgb(129, 125, 211) 39%, rgb(192, 190, 233) 100%);
+        }
+        
+        #registration-icon{
+            width: 10px;
+            padding:10px;
+        }
+        
+        .home-menu-button{
+            --color: #4b45bd;
+        }
+        
+        #home-welcome-message{
+            font-size:30px;
+            font-family: Roboto-Bold;
+            padding-top: 5%;
+            padding-bottom: 2%;
+        }
+        
+        #home-mini-welcome-message{
+            font-size: 20px;
+            opacity: $welcomeOpacityDark;
+        }
+        
     }
+    
+    //desktop display Design for desktop displays from 1024×768 through 1920×1080.
+    @media only screen and (min-width: 1600px) {
+        .nav-button{
+            width: 20%;
+            --border-radius: 20px;
+            height: 50px;
+        }
 
-    .button-grid{
-        position: relative;
-        left: -500px;
-    }
+        #home-welcome-message{
+            font-size:50px;
+            font-family: Roboto-Bold;
+            padding-top: 5%;
+            padding-bottom: 2%;
+        }
 
-    ion-content {
-        --background: url('/assets/img/background.svg') no-repeat 100% 100%;
+        #home-mini-welcome-message{
+            font-size: 28px;
+            opacity: $welcomeOpacityDark;
+        }
+    
+        .button-grid{
+            position: relative;
+            left: -500px;
+        }
+    
+        ion-content {
+            --background: url('/assets/img/background.svg') no-repeat 180% 70%;
+        }
     }
 }

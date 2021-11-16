@@ -32,7 +32,7 @@
               },
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": ["src/theme/variables.scss", "src/global.scss" , "node_modules/@fullcalendar/common/main.css"],
             "scripts": [],
             "aot": false,
             "vendorChunk": true,

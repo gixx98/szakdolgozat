@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import * as firebase from 'firebase/compat';
 import { Observable } from 'rxjs';
 import { Subject } from '../models/interfaces/subject.model';
+import { CalendarService } from './calendar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class SubjectService {
   subjects: Observable<Subject[]>;
 
   constructor(
-    public db: AngularFirestore
+    public db: AngularFirestore,
+    public calendarService: CalendarService
   ) {}
   
   getUser(){
@@ -28,20 +30,19 @@ export class SubjectService {
         this.db.collection('users').doc(this.getUser()).collection('subjects').doc(res.id).update({
           'sid':res.id
         });
-        this.db.collection('users').doc(this.getUser()).collection('events').add({
-          title:subject.name,
-          daysOfWeek:subject.day,
-          startTime: subject.hourStart,
-          endTime: subject.hourEnd,
-          startRecur: subject.startDay,
-          endRecur: '2021-12-08' //felev vege (implementalando)
-        });
-      })
+        const newId = this.db.createId();
+
+        this.calendarService.addEventBySubject(newId, res.id, subject);
+      });
     }
 
 
   getSubjects(){
     return this.db.collection('users').doc(this.getUser()).collection('subjects').snapshotChanges();
+  }
+
+  getSubjectsValue(){
+    return this.db.collection('users').doc(this.getUser()).collection('subjects').valueChanges();
   }
 
   getMarks(){
@@ -56,9 +57,10 @@ export class SubjectService {
     return this.db.collection('users').doc(this.getUser()).collection('subjects').doc(sid).valueChanges();
   }
 
-  delete(sid: string){
+  deleteSubject(sid: string){
     this.db.collection('users').doc(this.getUser()).collection('subjects').doc(sid).delete();
   }
+
 
   editSubject(subject:Subject,sid:string){
     this.db.collection('users').doc(this.getUser()).collection('subjects').doc(sid).update(

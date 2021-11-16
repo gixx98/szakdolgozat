@@ -14,5 +14,5 @@ export interface Subject {
     teacher?: string,
     exams_taken?: number,
     subject_taken?:number,
-    tests?: Test;
+    tests?: Test,
 }

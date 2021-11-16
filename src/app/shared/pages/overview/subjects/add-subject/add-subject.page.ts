@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-subject.page.scss'],
 })
 export class AddSubjectPage implements OnInit {
-  
 
   addSubjectForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -49,11 +48,13 @@ export class AddSubjectPage implements OnInit {
       teacher: this.addSubjectForm.get('teacher').value,
     }
 
+
+
     this.subjectService.add(subject);
     
     toastController.create({
       color: 'success',
-      duration: 750,
+      duration: 650,
       message: 'Tárgy sikeresen hozzáadva!',
     }).then((toast)=>{
       toast.present();

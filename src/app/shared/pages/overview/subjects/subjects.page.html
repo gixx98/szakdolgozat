@@ -4,7 +4,14 @@
 <div class="container">
 
 <ion-list>
-  
+  <ion-card *ngIf="getSubjectsLength() == 0">
+    <ion-card-header>
+      <ion-card-title>Még nincs felvett tantárgyad <ion-icon name="sad-outline"></ion-icon></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Vegyél fel a "Tantárgy felvétele" gombbal tantárgyakat, majd látogass el a naptár és átlagok szekcióba!
+    </ion-card-content>
+  </ion-card>
   <ion-item *ngFor="let subject of subjects;" lines="full">
     {{ subject.payload.doc.data().name }}
     <ion-button color="light" size="small" slot="end" class="ion-no-margin delete-button" (click)="editSubject(subject.payload.doc.data().sid)">Szerkesztés</ion-button>

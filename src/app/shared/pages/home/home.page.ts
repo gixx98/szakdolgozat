@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
@@ -7,14 +7,22 @@ import { MenuController } from '@ionic/angular';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
 
+  checked = false;
   constructor(
     private menu:MenuController,
-    private route:Router
+    private elementRef:ElementRef
     ) { }
 
   ngOnInit() {
+    this.elementRef.nativeElement.querySelector('#toggle').addEventListener('onChange',()=>{
+      console.log('Changed');
+    })
+  }
+
+  ngAfterViewInit(){
+    
   }
 
   openFirst() {
@@ -29,6 +37,15 @@ export class HomePage implements OnInit {
   openCustom() {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
+  }
+
+  toggleDarkMode(event){
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+      document.body.classList.toggle('dark', event.detail.checked);
+      
+    }else{
+      document.body.classList.toggle('light', event.detail.checked);
+    }
   }
 
 }

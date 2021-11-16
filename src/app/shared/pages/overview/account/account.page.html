@@ -6,7 +6,17 @@
       <ion-avatar slot="start">
         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
       </ion-avatar>
-      <ion-label>Ciao {{getUser()}}!</ion-label>
+      <ion-label>{{getUser()}}</ion-label>
     </ion-item>
-  </div>
+  <ion-grid class="ion-margin">
+    <ion-row class="ion-align-items-center"><strong>Beiratkozási időszak: </strong> {{this.beiratkozas}}</ion-row>
+    <br/> 
+    <ion-row class="ion-align-items-center"><strong>Szorgalmi időszak: </strong> {{this.szorgalmi}}</ion-row>
+    <br/> 
+    <ion-row class="ion-align-items-center"><strong>Vizsgaidőszak: </strong> {{this.vizsga}}</ion-row>
+    <br/> 
+    <ion-row> <strong>Utóvizsga-hét: </strong> {{this.utovizsga}}</ion-row>
+  </ion-grid>
+</div>
+
 </ion-content>

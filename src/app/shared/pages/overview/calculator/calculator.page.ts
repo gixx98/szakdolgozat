@@ -8,9 +8,12 @@ import { SubjectService } from 'src/app/shared/services/subject.service';
   templateUrl: './calculator.page.html',
   styleUrls: ['./calculator.page.scss'],
 })
+
 export class CalculatorPage implements OnInit, OnChanges{
   //az összes regisztrált tantárgy jegye és kredite objektumként egy tömbben;
   marksAndCredits: Array<{ mark: number, credit: number }> = [];
+
+  nameCreditMarks: Array<{name: string, credit: string, mark: string}> = [];
   //összesen felvett kredit
   credit: any = 0;
 
@@ -19,29 +22,54 @@ export class CalculatorPage implements OnInit, OnChanges{
   //kreditindex
   creditIndex: any = 0;
 
+  //korrigált kreditindex
+  corrCreditIndex: any = 0;
+
   subs: any;
+
+
 
   constructor(
     public subjectService: SubjectService,
   ) { }
 
+
   ngOnInit() {
-    this.subjectService.getMarks().toPromise()
-    .then((snapshot) => {
-      snapshot.docs.forEach((doc)=>{
-        if(doc.data().mark != ""){
-        this.marksAndCredits.push({mark:parseInt(doc.data().mark), credit:parseInt(doc.data().credit)})
+    // this.subjectService.getMarks().toPromise()
+    // .then((snapshot) => {
+    //   snapshot.docs.forEach((doc)=>{
+    //     if(doc.data().mark != ""){
+    //     this.marksAndCredits.push({mark:parseInt(doc.data().mark), credit:parseInt(doc.data().credit)})
+    //     this.nameCreditMarks.push({name:doc.data().name, credit: doc.data().credit, mark: doc.data().mark})
+    //     }
+    //   });
+    //   console.log(this.marksAndCredits);
+    //   console.log(this.nameCreditMarks)
+    //   this.credit = this.sumCredit();
+    //   this.gpa = this.sumGpa();
+    //   this.creditIndex = this.sumCreditIndex();
+    // })
+
+    this.subjectService.getSubjectsValue().subscribe(change => {
+      this.marksAndCredits = [];
+      this.nameCreditMarks = [];
+      change.forEach((doc) =>{
+        if(doc.mark != ""){
+          this.marksAndCredits.push({mark:parseInt(doc.mark), credit:parseInt(doc.credit)})
         }
-      });
-      console.log(this.marksAndCredits);
+        this.nameCreditMarks.push({name:doc.name, credit: doc.credit, mark: doc.mark})
+      }) 
       this.credit = this.sumCredit();
       this.gpa = this.sumGpa();
       this.creditIndex = this.sumCreditIndex();
     })
+    
+
   }
 
   refresh(){
     this.marksAndCredits = [];
+    this.nameCreditMarks = [];
     this.ngOnInit();
   }
 
@@ -96,6 +124,10 @@ export class CalculatorPage implements OnInit, OnChanges{
 
     creditIndex = Math.round((creditIndex / 30) * 100) / 100 ;
     return creditIndex;
+  }
+
+  sumCorrCreditIndex(){
+    
   }
 
 }

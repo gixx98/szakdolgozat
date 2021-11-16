@@ -3,6 +3,7 @@
     <ion-row class="ion-align-items-center">
       <ion-col size="12" class="ion-text-center">
         <app-logo></app-logo>
+      <ion-toggle id="toggle" [(ngModel)]="checked" (ionChange)="toggleDarkMode($event)"></ion-toggle>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -26,7 +27,7 @@
   </ion-grid>
 
   </div>
-    <ion-grid style="padding-top: 30px;" class="button-grid"> 
+    <ion-grid  class="button-grid"> 
       <ion-row class="ion-align-items-center">
         <ion-col size="12" class="ion-text-center"><ion-button [routerLink]="['/register']" class="nav-button">Regisztráció   <ion-icon name="person-add-outline" slot="end"></ion-icon></ion-button></ion-col>
       </ion-row>

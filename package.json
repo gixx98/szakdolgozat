@@ -33,7 +33,7 @@
     "@ionic/angular": "^5.5.2",
     "angular-password-strength-meter": "^3.0.1",
     "firebase": "^9.0.2",
-    "rxjs": "~6.6.0",
+    "rxjs": "^6.6.7",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4",
     "zxcvbn3": "^0.1.1"

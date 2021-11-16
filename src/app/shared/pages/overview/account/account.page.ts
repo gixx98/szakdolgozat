@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SemesterService } from 'src/app/shared/services/semester.service';
 
 @Component({
   selector: 'app-account',
@@ -7,9 +8,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class AccountPage implements OnInit,OnDestroy {
 
-  constructor() { }
+  constructor(
+    public semesterService: SemesterService
+  ) { }
+  
+  beiratkozas: string = "";
+  vizsga: string = "";
+  szorgalmi: string = "";
+  utovizsga: string = "";
 
   ngOnInit() {
+    this.getSemester();
   }
   
   ngOnDestroy(){
@@ -23,5 +32,18 @@ export class AccountPage implements OnInit,OnDestroy {
     }
 
     return str;
+  }
+
+  getSemester(){
+    var semester: any;
+    this.semesterService.getSemester().toPromise().then((row)=>{
+      semester = row.data();
+    }).then(()=>{
+      this.beiratkozas = semester.beiratkozas;
+      this.vizsga = semester.vizsga;
+      this.szorgalmi = semester.szorgalmi;
+      this.utovizsga = semester.utovizsga;
+    })
+
   }
 }

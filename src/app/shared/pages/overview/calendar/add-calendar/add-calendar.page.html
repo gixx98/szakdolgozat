@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Vissza"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Esemény hozzáadása</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+  <form [formGroup]="addEventForm" novalidate class="ion-margin">
+    <ion-list>
+    <ion-item lines="full">
+      <ion-label position="stacked">Esemény neve</ion-label>
+      <ion-input formControlName="name" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="stacked">Esemény napja</ion-label>
+      <ion-select value="1" okText="Menjen!" cancelText="Mégse" formControlName="day">
+        <ion-select-option value="1">Hétfő</ion-select-option>
+        <ion-select-option value="2">Kedd</ion-select-option>
+        <ion-select-option value="3">Szerda</ion-select-option>
+        <ion-select-option value="4">Csütörtök</ion-select-option>
+        <ion-select-option value="5">Péntek</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="stacked">Szín</ion-label>
+      <ion-select okText="Menjen!" cancelText="Mégse" formControlName="color">
+        <ion-select-option value="#5F9EA0">Kadét kék</ion-select-option>
+        <ion-select-option value="#C0C0C0">Ezüst</ion-select-option>
+        <ion-select-option value="#FFA500">Narancs</ion-select-option>
+        <ion-select-option value="#32CD32">Lime zöld</ion-select-option>
+        <ion-select-option value="#FF7F50">Korall</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item lines="full">
+      <ion-label position="stacked">Esemény kezdése</ion-label>
+      <ion-datetime displayFormat="HH:mm" minuteValues="0,15,30,45" formControlName="hourStart"></ion-datetime>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="stacked">Esemény vége</ion-label>
+      <ion-datetime displayFormat="HH:mm" minuteValues="0,15,30,45" formControlName="hourEnd"></ion-datetime>
+    </ion-item>
+
+
+    <ion-button (click)="addEvent()" [disabled]="addEventForm.invalid" style="--background:#4b45bd" expand="block">Hozzáadás</ion-button>
+
+  </ion-list>
+  </form>
+</div>
+</ion-content>

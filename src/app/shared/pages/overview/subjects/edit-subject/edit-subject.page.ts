@@ -21,7 +21,8 @@ export class EditSubjectPage implements OnInit {
     name: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required),
     day: new FormControl('', Validators.required),
-    hour: new FormControl('', Validators.required),
+    hourStart: new FormControl('', Validators.required),
+    hourEnd: new FormControl('', Validators.required),
     credit: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     mark: new FormControl('', [Validators.pattern("^[0-5]*$")]),
     room: new FormControl(''),
@@ -36,11 +37,13 @@ export class EditSubjectPage implements OnInit {
 
     this.subjectService.subjectForEdit(this.sid).subscribe(res => {
       this.subjectRef = res;
+
       this.editSubjectForm.setValue({
         name: this.subjectRef.name,
         type:this.subjectRef.type,
         day: this.subjectRef.day,
-        hour:  this.subjectRef.hour.substr(11,8),
+        hourStart:  this.subjectRef.hourStart,
+        hourEnd:  this.subjectRef.hourEnd,
         credit: this.subjectRef.credit,
         mark: this.subjectRef.mark,
         room: this.subjectRef.room,
