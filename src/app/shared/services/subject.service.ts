@@ -21,7 +21,10 @@ export class SubjectService {
     return JSON.parse(localStorage.getItem('user'))['uid'];
   }
 
-  // name:any,type:any,day:any, hour:any, credit:any,mark?:any,room?:any, teacher?:any
+  /**
+   * adds a subject to the database
+   * @param subject 
+   */
   add(subject:Subject){
 
     this.db.collection('users').doc(this.getUser()).collection('subjects').add(
@@ -36,10 +39,14 @@ export class SubjectService {
       });
     }
 
-
+/**
+ * 
+ * @returns all of the subjects from the database
+ */
   getSubjects(){
     return this.db.collection('users').doc(this.getUser()).collection('subjects').snapshotChanges();
   }
+
 
   getSubjectsValue(){
     return this.db.collection('users').doc(this.getUser()).collection('subjects').valueChanges();
@@ -53,15 +60,28 @@ export class SubjectService {
     return this.db.collection('users').doc(this.getUser()).collection('subjects').doc(sid).get();
   }
 
+  /**
+   * 
+   * @param sid 
+   * @returns 
+   */
   subjectForEdit(sid:any){
     return this.db.collection('users').doc(this.getUser()).collection('subjects').doc(sid).valueChanges();
   }
 
+  /**
+   * 
+   * @param sid stands for the subject id that we want to delete
+   */
   deleteSubject(sid: string){
     this.db.collection('users').doc(this.getUser()).collection('subjects').doc(sid).delete();
   }
 
-
+/**
+ * 
+ * @param subject {Subject} the new subject values
+ * @param sid {string} which subject will be edited (subject id)
+ */
   editSubject(subject:Subject,sid:string){
     this.db.collection('users').doc(this.getUser()).collection('subjects').doc(sid).update(
       {
@@ -72,6 +92,7 @@ export class SubjectService {
         hourEnd:  subject.hourStart,
         credit: subject.credit,
         mark: subject.mark,
+        completed: subject.completed,
         room: subject.room,
         teacher: subject.teacher
       }

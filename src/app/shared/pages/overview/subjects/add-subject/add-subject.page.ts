@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class AddSubjectPage implements OnInit {
 
+  
+
   addSubjectForm = new FormGroup({
     name: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required),
@@ -19,6 +21,7 @@ export class AddSubjectPage implements OnInit {
     hourStart: new FormControl('', Validators.required),
     hourEnd: new FormControl('', Validators.required),
     credit: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    completed: new FormControl(''),
     mark: new FormControl('', [Validators.pattern("^[0-5]*$")]),
     room: new FormControl(''),
     teacher: new FormControl('')
@@ -44,11 +47,10 @@ export class AddSubjectPage implements OnInit {
       startDay: this.addSubjectForm.get('hourStart').value.substr(0,10),
       credit: this.addSubjectForm.get('credit').value,
       mark: this.addSubjectForm.get('mark').value,
+      completed: this.addSubjectForm.get('completed').value,
       room: this.addSubjectForm.get('room').value,
       teacher: this.addSubjectForm.get('teacher').value,
     }
-
-
 
     this.subjectService.add(subject);
     

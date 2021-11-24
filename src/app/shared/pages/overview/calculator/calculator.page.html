@@ -6,14 +6,16 @@
     <br />
         <ion-grid class="ion-text-center">
             <ion-row class="ion-align-items-center">
-                <ion-col size="4"> <strong>Összes felvett kredit</strong></ion-col>
-                <ion-col size="4"> <strong>Súlyozott tanulmányi átlag</strong></ion-col>
-                <ion-col size="4"><strong>Kreditindex</strong></ion-col>
+                <ion-col size="3"> <strong>Összesen felvett kredit</strong></ion-col>
+                <ion-col size="3"> <strong>Súlyozott tanulmányi átlag</strong></ion-col>
+                <ion-col size="3"><strong>Kreditindex</strong></ion-col>
+                <ion-col size="3"><strong>Korrigált kreditindex</strong></ion-col>
             </ion-row>
             <ion-row class="ion-align-items-center">
-                <ion-col size="4" *ngIf="credit != 0">{{credit}}</ion-col>
-                <ion-col size="4" *ngIf="gpa != 0"> {{gpa}}</ion-col>
-                <ion-col size="4" *ngIf="creditIndex != 0">{{creditIndex}}</ion-col>
+                <ion-col size="3" *ngIf="credit != 0">{{credit}}</ion-col>
+                <ion-col size="3" *ngIf="gpa != 0"> {{gpa}}</ion-col>
+                <ion-col size="3" *ngIf="creditIndex != 0">{{creditIndex}}</ion-col>
+                <ion-col size="3" *ngIf="corrCreditIndex != 0">{{corrCreditIndex}}</ion-col>
             </ion-row>
         </ion-grid>
 

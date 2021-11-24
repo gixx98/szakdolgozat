@@ -27,15 +27,19 @@ export class CalendarService {
     this.db.collection('users').doc(this.getUser()).collection('events').doc(eid).delete();
   }
 
-  addEvent(title,daysOfWeek,color,startTime,endTime){
+  addEvent(title,description, color,startTime,endTime,allday){
     const newId = this.db.createId();
-    var event:Event = {
+    var event:any = {
       id: newId,
       title: title,
-      daysOfWeek: daysOfWeek,
+      description: description,
       color: color,
-      startTime:startTime,
-      endTime: endTime
+      start:startTime.substr(0,19),
+      end: endTime.substr(0,19),
+      extendedProps: {
+        type: 'CustomEvent'
+      },
+      allDay:allday
     }
 
     this.db.collection('users').doc(this.getUser()).collection('events').doc(newId).set(event);
@@ -43,14 +47,19 @@ export class CalendarService {
   
   addEventBySubject(id:string, sId: string, subject:any){
     this.db.collection('users').doc(this.getUser()).collection('events').doc(id).set({
-      eId: id,
+      id: id,
       subjectSid: sId,
       title:subject.name,
       daysOfWeek:subject.day,
       startTime: subject.hourStart,
       endTime: subject.hourEnd,
       startRecur: subject.startDay,
-      endRecur: '2021-12-08' //felev vege (implementalando)
+      endRecur: '2021-12-08', //felev vege (implementalando),
+      extendedProps: {
+        teacher: subject.teacher,
+        room: subject.room,
+        credit: subject.credit
+      }
     });
   }
 

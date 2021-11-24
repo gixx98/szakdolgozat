@@ -46,7 +46,7 @@ export class AuthenticationService {
       if (error.message == 'Firebase: The email address is badly formatted. (auth/invalid-email).') {
         this.showEmailAlert();
       } else if (error.message == 'Firebase: There is no user record corresponding to this identifier. The user may have been deleted. (auth/user-not-found).' || error.message == 'Firebase: The password is invalid or the user does not have a password. (auth/wrong-password).') {
-        this.showBadPasswordAlert()
+        this.showBadPasswordAlert();
       }
     })
   }
@@ -96,7 +96,7 @@ export class AuthenticationService {
     });
   }
 
-  RegisterUser(email, password, name) {
+  RegisterUser(email:string, password:string, name:string) {
     return this.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         result.user.sendEmailVerification();

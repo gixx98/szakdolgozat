@@ -25,6 +25,7 @@ export class EditSubjectPage implements OnInit {
     hourEnd: new FormControl('', Validators.required),
     credit: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     mark: new FormControl('', [Validators.pattern("^[0-5]*$")]),
+    completed: new FormControl(''),
     room: new FormControl(''),
     teacher: new FormControl('')
   })
@@ -46,6 +47,7 @@ export class EditSubjectPage implements OnInit {
         hourEnd:  this.subjectRef.hourEnd,
         credit: this.subjectRef.credit,
         mark: this.subjectRef.mark,
+        completed: this.subjectRef.completed,
         room: this.subjectRef.room,
         teacher: this.subjectRef.teacher
       })

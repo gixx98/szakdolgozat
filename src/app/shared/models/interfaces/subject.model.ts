@@ -9,6 +9,7 @@ export interface Subject {
     hourEnd: string,
     startDay: string,
     credit: number,
+    completed: boolean,
     mark?: number,
     room?: string,
     teacher?: string,

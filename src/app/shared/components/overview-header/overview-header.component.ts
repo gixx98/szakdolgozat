@@ -9,8 +9,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class OverviewHeaderComponent implements OnInit {
 
-  @Input()
-  linkable: boolean;
+  @Input() linkable: boolean;
 
   constructor(
     public authService: AuthenticationService,

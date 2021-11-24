@@ -1,8 +1,8 @@
-import { ThrowStmt } from '@angular/compiler';
-import { AfterViewInit, Component, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular'; 
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 
 
@@ -11,9 +11,10 @@ import { CalendarService } from 'src/app/shared/services/calendar.service';
   templateUrl: './calendar.page.html',
   styleUrls: ['./calendar.page.scss'],
 })
-export class CalendarPage implements OnInit{
-  @ViewChild('fullCalendar', { static: true }) calendar: FullCalendarComponent;
-
+export class CalendarPage implements OnInit, OnDestroy {
+  @ViewChild('fullCalendar') calendar: FullCalendarComponent;
+  subscription: Subscription;
+  
   constructor(
     public service: CalendarService,
     public loadingController: LoadingController,
@@ -42,8 +43,7 @@ export class CalendarPage implements OnInit{
     locale: "hu",
     nowIndicator: true,
     eventClick: (info) => {
-      // this.service.deleteEventById(info.event.id)
-      this.presentAlertConfirm(info.event.id,info.event.title);
+      this.presentSubjectEvent(info.event);
     },
     height: 700,
     droppable: true,
@@ -58,49 +58,65 @@ export class CalendarPage implements OnInit{
     }
   };
   
-
-
   events: Array<any> = [];
 
   ngOnInit() {
-    // this.presentLoading();
-    // this.service.getEvents().toPromise()
-    // .then((snapshot) => {
-    //   snapshot.docs.forEach((doc) => {
-    //     this.events.push({
-    //       title:doc.data().title, 
-    //       daysOfWeek: [doc.data().daysOfWeek], 
-    //       startRecur: doc.data().startRecur, 
-    //       startTime: doc.data().startTime,
-    //       endTime: doc.data().endTime,
-    //       endRecur:'2021-12-10',
-    //       color: doc.data().color
-    //     })
-    //   })
-    // }).then(()=>{
-    //   this.calendarOptions.events = this.events;
-    // });
-
-
-    this.service.getEventsValue().subscribe(value => {
+    this.presentLoading();
+    this.subscription = this.service.getEventsValue().subscribe(value => {
       this.events = [];
       value.forEach((doc) =>{
-        this.events.push({
-          id: doc.id,
-          title:doc.title, 
-          daysOfWeek: [doc.daysOfWeek], 
-          startRecur: doc.startDay, 
-          startTime: doc.startTime,
-          endTime: doc.endTime,
-          endRecur:'2021-12-10',
-          color: doc.color
-
-        });
+        if(doc.extendedProps.type === 'CustomEvent'){
+          this.events.push({
+            id: doc.id,
+            title:doc.title,
+            start: doc.start, 
+            end: doc.end,
+            color: doc.color,
+            allDay: doc.allDay
+          })
+        }
+        // else if(doc.extendedProps){
+        //   this.events.push({
+        //     id: doc.id,
+        //     title:doc.title, 
+        //     daysOfWeek: [doc.daysOfWeek], 
+        //     startRecur: doc.startDay, 
+        //     startTime: doc.startTime,
+        //     endTime: doc.endTime,
+        //     endRecur:'2021-12-10',
+        //     color: doc.color,
+        //     teacher: doc.extendedProps.teacher,
+        //     room: doc.extendedProps.room,
+        //     credit: doc.extendedProps.credit
+        //   });
+        // }
+        else{
+          this.events.push({
+            id: doc.id,
+            title:doc.title, 
+            daysOfWeek: [doc.daysOfWeek], 
+            startRecur: doc.startDay, 
+            startTime: doc.startTime,
+            endTime: doc.endTime,
+            endRecur:'2021-12-10',
+            color: doc.color
+          });
+        }
+      console.log(doc);
       });
       this.calendarOptions.events = this.events;
     });
   }
 
+  render(){
+    let calendarApi = this.calendar.getApi();
+    calendarApi.render();
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+    // clearInterval(this.interval);
+  }
   
   async presentLoading() {
     const loading = await this.loadingController.create({
@@ -108,6 +124,7 @@ export class CalendarPage implements OnInit{
       message: 'Kérlek várj...',
       duration: 750
     });
+    this.render();
     await loading.present();
   }
 
@@ -127,8 +144,43 @@ export class CalendarPage implements OnInit{
           }
         }, {
           text: 'Törlés',
+          cssClass: 'redColor',
           handler: () => {
             this.service.deleteEventById(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present()
+  }
+
+  async presentSubjectEvent(event:any) {
+    var message;
+    if(Object.keys(event.extendedProps).length != 0){
+      message = `Kezdés: ${event.startStr.substr(11,5)} <br/> Vége: ${event.endStr.substr(11,5)} <br/> Tanterem: ${event.extendedProps.room} <br/> Tanár: ${event.extendedProps.teacher}`;
+    }else{
+      message = `Kezdés: ${event.startStr.substr(11,5)} <br/> Vége: ${event.endStr.substr(11,5)}`;
+    }
+    const alert = await this.alertController.create({
+      cssClass: 'alertController',
+      header: event.title,
+      message:  message,
+      buttons: [
+        {
+          text: 'Törlés',
+          cssClass: 'redColor',
+          handler: () => {
+            this.presentAlertConfirm(event.id, event.title)
+            // this.service.deleteEventById(event.id);
+          }
+        },
+        {
+          text: 'Rendben',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+
           }
         }
       ]

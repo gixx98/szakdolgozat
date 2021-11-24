@@ -9,25 +9,24 @@ import { SubjectService } from 'src/app/shared/services/subject.service';
   styleUrls: ['./calculator.page.scss'],
 })
 
-export class CalculatorPage implements OnInit, OnChanges{
+export class CalculatorPage implements OnInit{
   //az összes regisztrált tantárgy jegye és kredite objektumként egy tömbben;
   marksAndCredits: Array<{ mark: number, credit: number }> = [];
+  marksAndCreditsForCorr: Array<{credit: number}> = [];
 
   nameCreditMarks: Array<{name: string, credit: string, mark: string}> = [];
   //összesen felvett kredit
-  credit: any = 0;
+  credit: any;;
 
   //súlyozott tanulmányi átlaghoz szükséges
-  gpa: any = 0;
+  gpa: any;
   //kreditindex
-  creditIndex: any = 0;
+  creditIndex: any;
 
   //korrigált kreditindex
-  corrCreditIndex: any = 0;
+  corrCreditIndex: any;
 
   subs: any;
-
-
 
   constructor(
     public subjectService: SubjectService,
@@ -35,58 +34,32 @@ export class CalculatorPage implements OnInit, OnChanges{
 
 
   ngOnInit() {
-    // this.subjectService.getMarks().toPromise()
-    // .then((snapshot) => {
-    //   snapshot.docs.forEach((doc)=>{
-    //     if(doc.data().mark != ""){
-    //     this.marksAndCredits.push({mark:parseInt(doc.data().mark), credit:parseInt(doc.data().credit)})
-    //     this.nameCreditMarks.push({name:doc.data().name, credit: doc.data().credit, mark: doc.data().mark})
-    //     }
-    //   });
-    //   console.log(this.marksAndCredits);
-    //   console.log(this.nameCreditMarks)
-    //   this.credit = this.sumCredit();
-    //   this.gpa = this.sumGpa();
-    //   this.creditIndex = this.sumCreditIndex();
-    // })
-
     this.subjectService.getSubjectsValue().subscribe(change => {
       this.marksAndCredits = [];
       this.nameCreditMarks = [];
+      this.marksAndCreditsForCorr = [];
+
       change.forEach((doc) =>{
         if(doc.mark != ""){
           this.marksAndCredits.push({mark:parseInt(doc.mark), credit:parseInt(doc.credit)})
         }
+        if(doc.completed == true){
+          this.marksAndCreditsForCorr.push({credit: parseInt(doc.credit)});
+        }
         this.nameCreditMarks.push({name:doc.name, credit: doc.credit, mark: doc.mark})
-      }) 
+      }); 
       this.credit = this.sumCredit();
       this.gpa = this.sumGpa();
       this.creditIndex = this.sumCreditIndex();
+      this.corrCreditIndex = (this.creditIndex * this.sumCorrCreditIndex() ).toFixed(2);
+      console.log(this.marksAndCreditsForCorr);
     })
-    
-
   }
 
-  refresh(){
-    this.marksAndCredits = [];
-    this.nameCreditMarks = [];
-    this.ngOnInit();
-  }
-
-  ngOnChanges(){
-  }
-
-  ngOnDestroy(){
-  }
-
-  
-
-  onClick(){
-    console.log(this.sumCredit());
-  }
-  
-  //Összeadja a kreditek számát
-  //Majd visszaadja
+  /**
+   * 
+   * @returns the summed credits of all subjects
+   */
   sumCredit(){
     var obj = this.marksAndCredits;
     var sumCredit:number = 0;
@@ -97,10 +70,11 @@ export class CalculatorPage implements OnInit, OnChanges{
     return sumCredit;
   }
 
-  //sum(Ei * KTi) / sum(KTi)
-  //tehát venni kell az obj mark * credit értékét
-  //azt pedig szummázni
-  //majd elosztani a creditSum-mal
+
+  /**
+   * sum(Ei * KTi) / sum(KTi)
+   * @returns gpa (Grade Point Average)
+   */
   sumGpa(){
     var obj:Object = this.marksAndCredits;
     var gpa:number = 0;
@@ -127,7 +101,13 @@ export class CalculatorPage implements OnInit, OnChanges{
   }
 
   sumCorrCreditIndex(){
-    
-  }
+    var obj = this.marksAndCreditsForCorr;
+    var completedCredits: number = 0;
 
+    for(var i in obj){
+      completedCredits += (obj[i].credit);
+    }
+
+    return completedCredits / this.sumCredit() ;
+  }
 }

@@ -13,10 +13,11 @@ export class AddCalendarPage implements OnInit {
 
   addEventForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    day: new FormControl('', Validators.required),
-    hourStart: new FormControl('', Validators.required),
-    hourEnd: new FormControl('', Validators.required),
-    color: new FormControl('')
+    description: new FormControl('', Validators.required),
+    start: new FormControl('', Validators.required),
+    end: new FormControl('', Validators.required),
+    color: new FormControl(''),
+    allDay: new FormControl('')
   })
 
 
@@ -30,14 +31,14 @@ export class AddCalendarPage implements OnInit {
   }
 
   addEvent(){
-    // var event:Event = {
       var title = this.addEventForm.get('name').value;
-      var daysOfWeek = this.addEventForm.get('day').value;
+      var description = this.addEventForm.get('description').value;
       var color = this.addEventForm.get('color').value;
-      var startTime = this.addEventForm.get('hourStart').value.substr(11,8);
-      var endTime = this.addEventForm.get('hourEnd').value.substr(11,8);
+      var start = this.addEventForm.get('start').value;
+      var end = this.addEventForm.get('end').value;
+      var allday = this.addEventForm.get('allDay').value;
 
-    this.calendarService.addEvent(title,daysOfWeek,color,startTime,endTime);
+    this.calendarService.addEvent(title, description, color, start, end, allday);
     this.router.navigate(['overview/calendar'])
 
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubjectService } from 'src/app/shared/services/subject.service';
 import { Router} from '@angular/router'
 import { AlertController } from '@ionic/angular';
@@ -9,7 +9,7 @@ import { CalendarService } from 'src/app/shared/services/calendar.service';
   templateUrl: './subjects.page.html',
   styleUrls: ['./subjects.page.scss'],
 })
-export class SubjectsPage implements OnInit {
+export class SubjectsPage implements OnInit, OnDestroy {
 
   constructor(
     private subjectService:SubjectService,
@@ -22,15 +22,15 @@ export class SubjectsPage implements OnInit {
 
   ngOnInit() {
     this.getSubjects();
-    setTimeout(() => console.log(this.subjects.length), 2000)
+  }
+
+  ngOnDestroy(){
+    this.getSubjects().unsubscribe();
   }
 
   subjects:any;
 
-  getSubjects = () => 
-    this.subjectService
-    .getSubjects()
-    .subscribe( res => (this.subjects = res));
+  getSubjects = () => this.subjectService.getSubjects().subscribe( res => (this.subjects = res));
 
   getSubjectsLength(){
     if(this.subjects){
@@ -38,8 +38,11 @@ export class SubjectsPage implements OnInit {
     }
   }
   
+  /**
+   * deletes the subject by the sid (subjectid)
+   * @param sid subject id
+   */
   deleteSubject(sid:string) {
-    // this.presentAlertConfirm();
     this.subjectService.deleteSubject(sid);
     this.calendarService.getEventsValue().subscribe(value => {
       value.forEach((row) =>{
@@ -50,11 +53,6 @@ export class SubjectsPage implements OnInit {
     })
   }
 
-  ifHasNoSubject(){
-    if(this.subjects == null){
-      return 'Még nincs tantárgy hozzáadva!';
-    }
-  }
 
   getSubject(sid:string){
     this.subjectService.getSubject(sid).toPromise().then((res) => {

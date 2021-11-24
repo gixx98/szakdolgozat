@@ -37,12 +37,12 @@
     </ion-item>
     <ion-item lines="full">
       <ion-label position="stacked">Óra kezdése</ion-label>
-      <ion-datetime displayFormat="HH:mm" formControlName="hourStart"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm" hourValues="6,7,8,9,10,11,12,13,14,15,16,17,18,19,20" minuteValues="0,15,30,45" formControlName="hourStart"></ion-datetime>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="stacked">Óra vége</ion-label>
-      <ion-datetime displayFormat="HH:mm" formControlName="hourEnd"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm" hourValues="6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21" minuteValues="0,15,30,45" formControlName="hourEnd"></ion-datetime>
     </ion-item>
 
     <ion-item lines="full">
@@ -53,6 +53,11 @@
     <ion-item lines="full">
       <ion-label position="stacked">Jegy (vagy becsült jegy)</ion-label>
       <ion-input formControlName="mark" type="text"></ion-input>
+    </ion-item>
+    
+    <ion-item lines="full">
+      <ion-label position="stacked">Teljesítve</ion-label>
+      <ion-checkbox formControlName="completed" color="success"></ion-checkbox>
     </ion-item>
 
     <ion-item lines="full">

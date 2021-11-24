@@ -15,7 +15,7 @@
   <ion-item *ngFor="let subject of subjects;" lines="full">
     {{ subject.payload.doc.data().name }}
     <ion-button color="light" size="small" slot="end" class="ion-no-margin delete-button" (click)="editSubject(subject.payload.doc.data().sid)">Szerkesztés</ion-button>
-    <ion-button color="danger" size="small" slot="end" class="ion-no-margin delete-button" (click)="getSubject( subject.payload.doc.data().sid )">Törlés</ion-button>
+    <ion-button color="danger" size="small" style="margin-left:10px;" slot="end" class="ion-no-margin delete-button" (click)="getSubject( subject.payload.doc.data().sid )">Törlés</ion-button>
     <ion-reorder slot="end"></ion-reorder>
   </ion-item>
 </ion-list>
