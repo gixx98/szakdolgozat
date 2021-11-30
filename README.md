@@ -16,3 +16,5 @@ Ez az információs rendszer, ami segít a hallgatóknak rendszerezni a mindenna
 - Angular 12
 - Firebase 9
 - Ionic 5
+
+A github projekt nem tartalmazza a hozzá szükséges modulokat, ezeket az inicializáció során kell letölteni hozzá.
