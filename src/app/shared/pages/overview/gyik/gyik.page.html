@@ -1,34 +1,15 @@
 <app-overview-header [linkable]="false"></app-overview-header>
 
 <ion-content>
-<ion-searchbar></ion-searchbar>
+    <div class="container">
+<ion-searchbar [(ngModel)]="search" placeholder="Próbáld ki a 'kredit' szóval"></ion-searchbar>
 
-<ion-card class="ion-margin">
-    <ion-card-title class="ion-padding">
-    Hányszor lehet vizsgázni vagy felvenni egy tárgyat?
-    </ion-card-title>
-    <ion-card-content class="ion-padding">
-        Egy tárgyat összesen <strong>háromszor</strong> lehet felvenni, egy félévben összesen <strong>háromszor</strong> lehet
-vizsgázni. Emellett <strong>összesen</strong> hatszor lehet vizsgázni egy tárgyból egy képzés során.
-    </ion-card-content>
+<ion-card *ngFor="let question of questions | filter: search" class="ion-margin">
+    <ion-card-title class="ion-padding">{{question.question}}</ion-card-title>
+    <ion-card-content class="ion-padding">{{question.answer}}</ion-card-content>
 </ion-card>
 
-<ion-card class="ion-margin">
-    <ion-card-title class="ion-padding">
-        Egy félévben maximum hány kreditet lehet felvenni, illetve mennyi ajánlott?
-    </ion-card-title>
-    <ion-card-content class="ion-padding">
-        Összesen 45 kreditet lehet egy félévben felvenni, ennél többet maximum külön engedéllyel
-kérhetsz. Az ajánlott haladáshoz legalább 30 kreditet érdemes felvenni.
-    </ion-card-content>
-</ion-card>
-
-<ion-card class="ion-margin">
-    <ion-card-title class="ion-padding">
-        Állami képzésen való bentmaradás feltételei
-    </ion-card-title>
-    <ion-card-content class="ion-padding">
-        Jelenleg két félév alatt 36 teljesített kredit és elméleti szakokon 3.5 gyakorlati szakokon pedig 3.0 súlyozott tanulmányi átlag kell. <a href="https://u-szeged.hu/download.php?docID=87082" target="_blank">További információk.</a>
-    </ion-card-content>
-</ion-card>
+</div>
 </ion-content>
+
+

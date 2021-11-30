@@ -21,4 +21,17 @@ describe('RegisterPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('#ifContainsNumber() should give back if input has number', () => {
+    expect(component.ifContainsNumber()).toMatch(/input has number/i, '');
+    component.ifContainsNumber();
+    expect(component.ifContainsNumber()).toMatch(/input has no number/i, '');
+  });
+
+  it('#ifHasUpperAndLowerCase() should give back if input has upper and lowercase', () => {
+    expect(component.ifContainsNumber()).toMatch(/input has uppercase/i, '');
+    component.ifHasUpperAndLowerCase();
+    expect(component.ifContainsNumber()).toMatch(/input has no uppercase/i, '');
+  });
+
 });
